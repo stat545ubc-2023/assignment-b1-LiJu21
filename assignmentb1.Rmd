@@ -1,0 +1,64 @@
+---
+title: "Assignment B1"
+author: "Li Ju"
+date: "2023-10-30"
+output: github_document
+---
+
+# Exercise 1 and 2: Make a Function and Document your Function
+
+In this exercise, I will make a generic function that can group by a specific column and summarize statistics calculated for another specific column in the dataset. This idea came from my repeated **group_by() %>% summarise()** workflow in my mda project.
+
+```{r}
+library(dplyr)
+
+#' @title Summarize a column by a group
+#' @details This function groups the data by a specified column and calculates statistics for another specified column.
+#' @param df The data we will manipulate.
+#' @param group_col The column the data should be grouped by.
+#' @param summary_col The column statistics should be calculated for.
+#' @return A new data frame with the summarized statistics including the average, maximum and minimum of the summary column..
+summarize_col_by_group <- function(df, group_col, summary_col) {
+  result <- df %>%
+    group_by(.data[[group_col]]) %>%
+    filter(!all(is.na(.data[[summary_col]]))) %>%
+    summarise(
+      average = mean(.data[[summary_col]], na.rm = TRUE),
+      max_value = max(.data[[summary_col]], na.rm = TRUE),
+      min_value = min(.data[[summary_col]], na.rm = TRUE),
+    )
+  return(result)
+}
+```
+
+# Exercise 3: Include examples
+
+I will include two examples from my mda project. So first I will load library and I will add age column into my vancouver_trees dataset:
+```{r}
+library(datateachr)
+vancouver_trees <- vancouver_trees %>%
+  mutate(age = difftime(Sys.Date(), date_planted))
+```
+
+## Example 1:
+```{r}
+# Used the generic function to grab information around trees in different neighbourhoods including the average age of trees, the maximal age of trees and the minimal age of trees
+vancouver_trees_summary_by_neighbourhood <- summarize_col_by_group(vancouver_trees, group_col = "neighbourhood_name", summary_col = "age")
+vancouver_trees_summary_by_neighbourhood
+```
+
+## Example 2:
+
+```{r}
+# Used the generic function to grab information around trees grouped by different species including the average age of trees, the maximal age of trees and the minimal age of trees
+vancouver_trees_summary_by_species <- summarize_col_by_group(vancouver_trees, group_col = "species_name", summary_col = "age")
+vancouver_trees_summary_by_species
+```
+
+
+# Exercise 4: Test the Function
+
+```{r}
+
+```
+
