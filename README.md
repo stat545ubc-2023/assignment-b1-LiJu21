@@ -7,7 +7,7 @@ This assignment aims to make a generic function in R to replace some repeated co
 2. Navigate to the .md file (or you can open the .Rmd file in RStudio and knit the document to produce a .md file).
 3. Read through the .md file.
 
-## Documents in this Repository
+## Documents in this repository
  1. README.md
  2. assignmentb1.Rmd
  3. assignmentb1.md
