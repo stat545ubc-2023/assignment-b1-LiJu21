@@ -31,7 +31,7 @@ library(dplyr)
 #' @param df The data we will manipulate.
 #' @param group_col The column the data should be grouped by.
 #' @param summary_col The column statistics should be calculated for.
-#' @return A new data frame with the summarized statistics including the average, maximum and minimum of the summary column..
+#' @return A new data frame with the summarized statistics including the average, maximum and minimum of the summary column.
 summarize_col_by_group <- function(df, group_col, summary_col) {
   if (!is.numeric(df[[summary_col]])) {
     stop("The summary column must be numeric.")
@@ -146,7 +146,7 @@ test_that("function works on vector with no NA's", {
 })
 ```
 
-    ## Test passed 🥳
+    ## Test passed 😸
 
 ## Test with vector that has NA’s
 
@@ -165,19 +165,19 @@ test_that("function works on vector has NA's", {
 })
 ```
 
-    ## Test passed 🥳
+    ## Test passed 🎉
 
 ## Test with vector of a different type
 
 ``` r
 test_that("function works on vector of a different type", {
-test_data_diff <- data.frame(
-  group = c("a", "b", "b"),
-  summary = c("a", "b", "b")
-)
+  test_data_diff <- data.frame(
+    group = c("a", "b", "b"),
+    summary = c("a", "b", "b")
+  )
   
   expect_error(summarize_col_by_group(test_data_diff, "group", "summary"))
 })
 ```
 
-    ## Test passed 🎉
+    ## Test passed 🌈
